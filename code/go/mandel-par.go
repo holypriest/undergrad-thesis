@@ -10,6 +10,7 @@ import "runtime"
 
 var rows, err1 = strconv.Atoi(os.Getenv("INPUTMAT_ROWS"))
 var columns, err2 = strconv.Atoi(os.Getenv("INPUTMAT_COLS"))
+var num_procs, err3 = strconv.Atoi(os.Getenv("NUM_THREADS"))
 
 func mandelbrotorbit(c complex128) int {
 	z := complex(0, 0) + c
@@ -23,7 +24,7 @@ func mandelbrotorbit(c complex128) int {
 }
 
 func mandelbrot(inputmat [][]complex128) [][]int {
-	runtime.GOMAXPROCS(8)
+	runtime.GOMAXPROCS(num_procs)
 	var wg sync.WaitGroup
 	wg.Add(rows)
 

@@ -8,6 +8,7 @@ xmin, xmax = np.float64(-2.5), np.float64(1.0)
 ymin, ymax = np.float64(-1.25), np.float64(1.25)
 nx = int(os.environ.get('INPUTMAT_ROWS'))
 ny = int(os.environ.get('INPUTMAT_COLS'))
+procs = int(os.environ.get('NUM_THREADS'))
 maxiter = 100
 
 
@@ -39,7 +40,7 @@ def mandelbrot(x):
     return list(map(mandelbrotorbit, Z))
 
 
-p = Pool()
+p = Pool(procs)
 N = p.map(mandelbrot, X)
 
 # with open('output-file.csv', 'w') as f:
