@@ -44,4 +44,6 @@ Y = linspace(-1.25, 1.25, columns)
 end
 
 N = pmap(mandelbrot, X)
-# writedlm("output-file.csv", N, ';')
+if "-export" in ARGS
+    writedlm("output-file.csv", N, ';')
+end

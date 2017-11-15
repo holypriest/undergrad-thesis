@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include <omp.h>
 #include "complex.h"
 #include "linspace.h"
@@ -7,7 +8,7 @@
 int rows;
 int columns;
 
-void setSizes() {
+void setGlobalVariables() {
     rows = atoi(getenv("INPUTMAT_ROWS"));
     columns = atoi(getenv("INPUTMAT_COLS"));
 }
@@ -61,14 +62,21 @@ int** mandelbrot(Complex** inputmat) {
     return outputmat;
 }
 
-int main() {
+int main(int argc, char *argv[]) {
 
-    setSizes();
+    setGlobalVariables();
     Complex start, end;
     start.re = -2.5; start.im = -1.25;
     end.re = 1.0; end.im = 1.25;
     Complex **inputmat = clinspace(start, end, rows, columns);
 
-    mandelbrot(inputmat);
+    int **outputmat = mandelbrot(inputmat);
+    if(argc != 0){
+        for (int i = 0; i < argc; i++) {
+            if (!strcmp(argv[i], "-export")) {
+                matrixToCsv(outputmat);
+            }
+        }
+    }
     return 0;
 }

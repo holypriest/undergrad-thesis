@@ -40,4 +40,6 @@ function mandelbrot(x::Float64)
 end
 
 N = map(mandelbrot, X)
-# writedlm("output-file.csv", N, ';')
+if "-export" in ARGS
+    writedlm("output-file.csv", N, ';')
+end

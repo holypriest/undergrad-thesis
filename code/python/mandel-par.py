@@ -3,6 +3,7 @@ from matplotlib import pyplot
 from multiprocessing import Pool
 import numpy as np
 import os
+import sys
 
 xmin, xmax = np.float64(-2.5), np.float64(1.0)
 ymin, ymax = np.float64(-1.25), np.float64(1.25)
@@ -43,9 +44,15 @@ def mandelbrot(x):
 p = Pool(procs)
 N = p.map(mandelbrot, X)
 
-# with open('output-file.csv', 'w') as f:
-#     writer = csv.writer(f, delimiter=';')
-#     writer.writerows(N)
+def matrix_to_csv(m):
+    filename = 'output-py-{}.csv'.format(nx)
+    with open(filename, 'w') as f:
+        writer = csv.writer(f, delimiter=';')
+        writer.writerows(N)
 
-pyplot.imshow(N)
-pyplot.savefig('mandel.png')
+if '-export' in sys.argv:
+    matrix_to_csv(N)
+
+if '-fractal' in sys.argv:
+    pyplot.imshow(N)
+    pyplot.savefig('mandel.png')

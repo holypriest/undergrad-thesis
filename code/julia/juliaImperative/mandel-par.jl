@@ -50,4 +50,6 @@ function mandelbrot(inputmat::SharedArray{Complex128,2}, outputmat::SharedArray{
 end
 
 mandelbrot(inputmat, outputmat)
-#writedlm("output-jl-par-14000-10000.csv", outputmat, ';')
+if "-export" in ARGS
+    writedlm("output-file.csv", outputmat, ';')
+end

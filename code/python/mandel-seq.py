@@ -2,6 +2,7 @@ import csv
 from matplotlib import pyplot
 import numpy as np
 import os
+import sys
 
 xmin, xmax = np.float64(-2.5), np.float64(1.0)
 ymin, ymax = np.float64(-1.25), np.float64(1.25)
@@ -37,14 +38,17 @@ def mandelbrot(x):
     Z = [complex(x, y) for y in Y]
     return list(map(mandelbrotorbit, Z))
 
-
 N = list(map(mandelbrot, X))
 
-# Exports output matrix to a csv file
-# with open('output-py-seq-14000-10000.csv', 'w') as f:
-#     writer = csv.writer(f, delimiter=';')
-#     writer.writerows(N)
+def matrix_to_csv(m):
+    filename = 'output-py-{}.csv'.format(nx)
+    with open(filename, 'w') as f:
+        writer = csv.writer(f, delimiter=';')
+        writer.writerows(N)
 
-# Exports output matrix to a graphic representation (png)
-pyplot.imshow(N)
-pyplot.savefig('mandel.png')
+if '-export' in sys.argv:
+    matrix_to_csv(N)
+
+if '-fractal' in sys.argv:
+    pyplot.imshow(N)
+    pyplot.savefig('mandel.png')

@@ -1,6 +1,7 @@
 package main
 
 import "fmt"
+import "flag"
 import "math"
 import "math/cmplx"
 import "os"
@@ -8,9 +9,9 @@ import "strconv"
 import "sync"
 import "runtime"
 
-var rows, err1 = strconv.Atoi(os.Getenv("INPUTMAT_ROWS"))
-var columns, err2 = strconv.Atoi(os.Getenv("INPUTMAT_COLS"))
-var num_procs, err3 = strconv.Atoi(os.Getenv("NUM_THREADS"))
+var rows, _ = strconv.Atoi(os.Getenv("INPUTMAT_ROWS"))
+var columns, _ = strconv.Atoi(os.Getenv("INPUTMAT_COLS"))
+var num_procs, _ = strconv.Atoi(os.Getenv("NUM_THREADS"))
 
 func mandelbrotorbit(c complex128) int {
 	z := complex(0, 0) + c
@@ -77,18 +78,24 @@ func clinspace(start complex128, end complex128, m int, n int) [][]complex128 {
 }
 
 func matrix_to_csv(matrix [][]int) {
+	filename := fmt.Sprintf("output-go-%d.txt", rows)
+	file, _ := os.Create(filename)
 	for i := 0; i < rows; i++ {
 		for j := 0; j < columns; j++ {
 			if j != columns-1 {
-				fmt.Printf("%d;", matrix[i][j])
+				fmt.Fprintf(file, "%d;", matrix[i][j])
 			} else {
-				fmt.Println(matrix[i][j])
+				fmt.Fprintln(file, matrix[i][j])
 			}
 		}
 	}
 }
 
 func main() {
+	export_flag := flag.Bool("export", false, "Prints output matrix in CSV format")
+	flag.Parse()
 	outputmat := mandelbrot(clinspace(-2.5-1.25i, 1.0+1.25i, rows, columns))
-	matrix_to_csv(outputmat)
+	if *export_flag {
+		matrix_to_csv(outputmat)
+	}
 }

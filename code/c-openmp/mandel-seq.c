@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include "complex.h"
 #include "linspace.h"
 
@@ -21,15 +22,20 @@ void printMatrix(int **m) {
 }
 
 void matrixToCsv(int **m) {
+    FILE *fp;
+    char filename[20];
+    sprintf(filename, "output-omp-%d.csv", rows);
+    fp = fopen(filename, "w");
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < columns; j++) {
             if (j != columns-1) {
-                printf("%d;", m[i][j]);
+                fprintf(fp, "%d;", m[i][j]);
             } else {
-                printf("%d\n", m[i][j]);
+                fprintf(fp, "%d\n", m[i][j]);
             }
         }
     }
+    fclose(fp);
 }
 
 int mandelbrotorbit(Complex c) {
@@ -59,7 +65,7 @@ int** mandelbrot(Complex** inputmat) {
     return outputmat;
 }
 
-int main() {
+int main(int argc, char *argv[]) {
 
     setGlobalVariables();
     Complex start, end;
@@ -67,6 +73,13 @@ int main() {
     end.re = 1.0; end.im = 1.25;
     Complex **inputmat = clinspace(start, end, rows, columns);
 
-    mandelbrot(inputmat);
+    int **outputmat = mandelbrot(inputmat);
+    if(argc != 0){
+        for (int i = 0; i < argc; i++) {
+            if (!strcmp(argv[i], "-export")) {
+                matrixToCsv(outputmat);
+            }
+        }
+    }
     return 0;
 }

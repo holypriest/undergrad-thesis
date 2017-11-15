@@ -46,4 +46,6 @@ function mandelbrot(inputmat::Array{Complex128,2}, outputmat::Array{Integer,2})
 end
 
 mandelbrot(inputmat, outputmat)
-#writedlm("output-file.csv", outputmat, ';')
+if "-export" in ARGS
+    writedlm("output-file.csv", outputmat, ';')
+end
