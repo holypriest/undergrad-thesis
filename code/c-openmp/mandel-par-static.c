@@ -7,10 +7,12 @@
 
 int rows;
 int columns;
+int nthreads;
 
 void setGlobalVariables() {
     rows = atoi(getenv("INPUTMAT_ROWS"));
     columns = atoi(getenv("INPUTMAT_COLS"));
+    nthreads = atoi(getenv("NUM_THREADS"));
 }
 
 void printMatrix(int **m) {
@@ -58,7 +60,7 @@ int** mandelbrot(Complex** inputmat) {
         outputmat[i] = malloc(columns * sizeof(int));
     }
 
-    #pragma omp parallel for
+    #pragma omp parallel for num_threads(nthreads)
     for(int i = 0; i < rows; i++) {
         for(int j = 0; j < columns; j++) {
             outputmat[i][j] = mandelbrotorbit(inputmat[i][j]);
