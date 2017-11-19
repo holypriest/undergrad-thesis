@@ -51,5 +51,5 @@ end
 
 mandelbrot(inputmat, outputmat)
 if "-export" in ARGS
-    writedlm("output-file.csv", outputmat, ';')
+    writedlm("output-jl-imp-par-$rows.csv", outputmat, ';')
 end

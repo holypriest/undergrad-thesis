@@ -45,5 +45,5 @@ end
 
 N = pmap(mandelbrot, X)
 if "-export" in ARGS
-    writedlm("output-file.csv", N, ';')
+    writedlm("output-jl-fun-par-$rows.csv", N, ';')
 end

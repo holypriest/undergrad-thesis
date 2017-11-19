@@ -41,9 +41,9 @@ def mandelbrot(x):
 N = list(map(mandelbrot, X))
 
 def matrix_to_csv(m):
-    filename = 'output-py-{}.csv'.format(nx)
+    filename = 'output-py-seq-{}.csv'.format(nx)
     with open(filename, 'w') as f:
-        writer = csv.writer(f, delimiter=';')
+        writer = csv.writer(f, delimiter=';', lineterminator='\n')
         writer.writerows(N)
 
 if '-export' in sys.argv:

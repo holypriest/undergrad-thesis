@@ -23,15 +23,20 @@ void printMatrix(int **m) {
 }
 
 void matrixToCsv(int **m) {
+    FILE *fp;
+    char filename[25];
+    sprintf(filename, "output-omp-par-%d.csv", rows);
+    fp = fopen(filename, "w");
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < columns; j++) {
             if (j != columns-1) {
-                printf("%d;", m[i][j]);
+                fprintf(fp, "%d;", m[i][j]);
             } else {
-                printf("%d\n", m[i][j]);
+                fprintf(fp, "%d\n", m[i][j]);
             }
         }
     }
+    fclose(fp);
 }
 
 int mandelbrotorbit(Complex c) {
@@ -71,11 +76,9 @@ int main(int argc, char *argv[]) {
     Complex **inputmat = clinspace(start, end, rows, columns);
 
     int **outputmat = mandelbrot(inputmat);
-    if(argc != 0){
-        for (int i = 0; i < argc; i++) {
-            if (!strcmp(argv[i], "-export")) {
+    if(argc > 1){
+        if(!strcmp(argv[1], "-export")){
                 matrixToCsv(outputmat);
-            }
         }
     }
     return 0;

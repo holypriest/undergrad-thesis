@@ -23,8 +23,8 @@ void printMatrix(int **m) {
 
 void matrixToCsv(int **m) {
     FILE *fp;
-    char filename[20];
-    sprintf(filename, "output-omp-%d.csv", rows);
+    char filename[25];
+    sprintf(filename, "output-omp-seq-%d.csv", rows);
     fp = fopen(filename, "w");
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < columns; j++) {
@@ -74,11 +74,9 @@ int main(int argc, char *argv[]) {
     Complex **inputmat = clinspace(start, end, rows, columns);
 
     int **outputmat = mandelbrot(inputmat);
-    if(argc != 0){
-        for (int i = 0; i < argc; i++) {
-            if (!strcmp(argv[i], "-export")) {
+    if(argc > 1){
+        if(!strcmp(argv[1], "-export")){
                 matrixToCsv(outputmat);
-            }
         }
     }
     return 0;

@@ -41,5 +41,5 @@ end
 
 N = map(mandelbrot, X)
 if "-export" in ARGS
-    writedlm("output-file.csv", N, ';')
+    writedlm("output-jl-fun-seq-$rows.csv", N, ';')
 end

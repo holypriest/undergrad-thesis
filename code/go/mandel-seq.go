@@ -66,7 +66,7 @@ func clinspace(start complex128, end complex128, m int, n int) [][]complex128 {
 }
 
 func matrix_to_csv(matrix [][]int) {
-	filename := fmt.Sprintf("output-go-%d.txt", rows)
+	filename := fmt.Sprintf("output-go-seq-%d.csv", rows)
 	file, _ := os.Create(filename)
 	for i := 0; i < rows; i++ {
 		for j := 0; j < columns; j++ {
