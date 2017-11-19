@@ -15,6 +15,6 @@ Na pasta [experiments](experiments) existem _scripts_ capazes de reproduzir os e
 
 ## Tenho dúvidas, posso entrar em contato?
 
-Sim, fique à vontade. Responderei assim que possível. O meu e-mail para contato é [rabello@usp.br](mailto:rabello@usp.br).
+Sim, fique à vontade. Responderei assim que possível. O meu e-mail para contato é [rabello@alumni.usp.br](mailto:rabello@alumni.usp.br).
 
 
