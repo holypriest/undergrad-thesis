@@ -7,11 +7,11 @@ O texto original em LaTeX, enviado para avaliação, pode ser acessado [aqui](ht
 
 ## Como navegar por este repositório?
 
-Existem duas pastas: [code](code/info.md) e [experiments](experiments/info.md).
+Existem duas pastas: [code](code) e [experiments](experiments).
 
-Na pasta [code](code/c-openmp/info.md) você encontrará os códigos utilizados ao longo do trabalho, separados em pastas de acordo com a linguagem de implementação. Em cada uma das pastas há um documento com explicações sobre como compilar (se necessário) e executar os códigos.
+Na pasta [code](code) você encontrará os códigos utilizados ao longo do trabalho, separados em pastas de acordo com a linguagem de implementação. Em cada uma das pastas há um documento com explicações sobre como compilar (se necessário) e executar os códigos.
 
-Na pasta [experiments](experiments/info.md) existem _scripts_ capazes de reproduzir os experimentos que foram feitos ao longo do estudo, bem como arquivos compactados com os resultados enviados para avaliação.
+Na pasta [experiments](experiments) existem _scripts_ capazes de reproduzir os experimentos que foram feitos ao longo do estudo, bem como arquivos compactados com os resultados enviados para avaliação.
 
 ## Tenho dúvidas, posso entrar em contato?
 

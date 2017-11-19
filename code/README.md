@@ -2,10 +2,10 @@
 
 O algoritmo de obtenção do conjunto de Mandelbrot foi implementado em 4 linguagens diferentes:
 
-- [Go](go/info.md)
-- [Julia](julia/info.md)
-- [Python](python/info.md)
-- [C/OpenMP](c-openmp/info.md)
+- [Go](go)
+- [Julia](julia)
+- [Python](python)
+- [C/OpenMP](c-openmp)
 
 sendo que, em Julia, foram experimentados dois paradigmas de programação: funcional e imperativo
 
